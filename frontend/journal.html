@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Журнал — BBC</title>
+  <link rel="stylesheet" href="css/custom.css" />
+</head>
+<body>
+
+<div id="app-header-root"></div>
+
+<div class="main-content">
+    <div class="page-body">
+
+      <div class="page-header">
+        <div class="page-header-left">
+          <h1 class="page-title">Журнал</h1>
+        </div>
+        <div class="page-header-actions">
+          <div class="search-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            <input id="search" type="text" class="search-input" placeholder="Поиск..." aria-label="Поиск по журналу" />
+          </div>
+          <select id="filter-type" class="filter-select" aria-label="Фильтр по типу">
+            <option value="">Все типы</option>
+            <option value="Счёт">Счёт</option>
+            <option value="Клиент">Клиент</option>
+            <option value="Сотрудник">Сотрудник</option>
+            <option value="Заявка">Заявка</option>
+            <option value="Система">Система</option>
+          </select>
+          <button type="button" class="btn btn-outline" id="btn-reset">Сбросить</button>
+        </div>
+      </div>
+
+      <p id="count-label" class="text-muted count-label"></p>
+
+      <div class="journal-grid" id="journal-grid"></div>
+
+      <div id="empty-journal" class="empty-state hidden">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+        <p>Записи не найдены</p>
+      </div>
+
+      <div class="pagination" id="pagination"></div>
+
+    </div>
+  </div>
+
+<script type="module" src="js/journal.js"></script>
+</body>
+</html>

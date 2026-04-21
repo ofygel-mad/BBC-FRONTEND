@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Сотрудники — BBC</title>
+  <link rel="stylesheet" href="css/custom.css" />
+</head>
+<body>
+
+<div id="app-header-root"></div>
+
+<div class="main-content">
+    <div class="page-body">
+
+      <div class="page-header">
+        <div class="page-header-left">
+          <h1 class="page-title">Сотрудники</h1>
+        </div>
+        <div class="page-header-actions">
+          <div class="search-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            <input id="search" type="text" class="search-input" placeholder="Поиск по имени, ИИН..." aria-label="Поиск" />
+          </div>
+          <select id="filter-status" class="filter-select" aria-label="Фильтр по статусу">
+            <option value="">Все статусы</option>
+            <option value="active">Активные</option>
+            <option value="inactive">Неактивные</option>
+          </select>
+          <select id="filter-pos" class="filter-select" aria-label="Фильтр по должности">
+            <option value="">Все должности</option>
+          </select>
+          <button type="button" class="btn btn-primary" id="btn-add">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Добавить
+          </button>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>ФИО</th>
+              <th>ИИН</th>
+              <th>Должность</th>
+              <th>Телефон</th>
+              <th>Статус</th>
+              <th>Действия</th>
+            </tr>
+          </thead>
+          <tbody id="emp-tbody"></tbody>
+        </table>
+      </div>
+      <div id="empty-emp" class="empty-state hidden">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <p>Сотрудники не найдены</p>
+      </div>
+
+    </div>
+  </div>
+
+<div class="modal-overlay" id="emp-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 class="modal-title" id="modal-title">Добавить сотрудника</h3>
+      <button type="button" class="modal-close" id="modal-close" aria-label="Закрыть">×</button>
+    </div>
+    <form id="emp-form" novalidate>
+      <input type="hidden" id="emp-id" />
+      <div class="form-group">
+        <label class="form-label" for="f-name">ФИО *</label>
+        <input id="f-name" type="text" class="form-input" placeholder="Иванов Иван Иванович" required />
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="f-iin">ИИН *</label>
+          <input id="f-iin" type="text" class="form-input" placeholder="123456789012" maxlength="12" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="f-phone">Телефон</label>
+          <input id="f-phone" type="tel" class="form-input" placeholder="+7 700 000 00 00" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="f-position">Должность *</label>
+        <input id="f-position" type="text" class="form-input" placeholder="Бухгалтер" required />
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="f-status">Статус</label>
+        <select id="f-status" class="form-select" aria-label="Статус сотрудника">
+          <option value="active">Активный</option>
+          <option value="inactive">Неактивный</option>
+        </select>
+      </div>
+      <p id="form-error" class="form-error"></p>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline" id="btn-cancel">Отмена</button>
+        <button type="submit" class="btn btn-primary" id="btn-save">Сохранить</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script type="module" src="js/employees.js"></script>
+</body>
+</html>

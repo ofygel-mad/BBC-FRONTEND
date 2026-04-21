@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Биллинг — BBC</title>
+  <link rel="stylesheet" href="css/custom.css" />
+</head>
+<body>
+
+<div id="app-header-root"></div>
+
+<div class="main-content">
+  <div class="page-body">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <h1 class="page-title">Биллинг</h1>
+      </div>
+      <div class="page-header-actions">
+        <button type="button" class="btn btn-primary">Подписаться</button>
+      </div>
+    </div>
+
+    <div class="billing-period">
+      <p class="billing-period-text" id="billing-period-text"></p>
+      <p class="billing-period-note">
+        После окончания бесплатного периода система будет доступна только для просмотра.
+        Для продолжения работы оформите подписку.
+      </p>
+    </div>
+
+    <div class="billing-tariff">
+      <p class="billing-tariff-title">Условия тарифов</p>
+
+      <div class="billing-tariff-row">
+        <p class="billing-tariff-price">Стоимость лицензии за активного сотрудника: <strong>2 349 ₸/мес</strong></p>
+        <p class="billing-tariff-hint">Активный сотрудник — сотрудник, которому назначена хотя бы одна заявка в текущем месяце.</p>
+      </div>
+
+      <div class="billing-tariff-row">
+        <p class="billing-tariff-price">Стоимость лицензии за активного клиента: <strong>3 349 ₸/мес</strong></p>
+        <p class="billing-tariff-hint">Активный клиент — клиент, по которому создана хотя бы одна заявка в текущем месяце.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script type="module">
+  import { renderSidebar, checkAuth } from './js/app.js';
+  if (!checkAuth()) throw new Error('not auth');
+  renderSidebar('billing');
+
+  const trialEnd = new Date(Date.now() + 30 * 86400000);
+  const fmt = trialEnd.toLocaleDateString('ru-RU', { day: '2-digit', month: 'long', year: 'numeric' });
+  document.getElementById('billing-period-text').textContent =
+    `Вы используете бесплатный период до ${fmt}`;
+</script>
+</body>
+</html>

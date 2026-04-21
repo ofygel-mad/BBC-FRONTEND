@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Статистика — BBC</title>
+  <link rel="stylesheet" href="css/custom.css" />
+</head>
+<body>
+
+<div id="app-header-root"></div>
+
+<div class="main-content">
+  <div class="page-body">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <h1 class="page-title">Статистика</h1>
+      </div>
+    </div>
+
+    <div class="stats-counters">
+      <div class="stat-counter-card">
+        <p class="stat-counter-label">Активных заявок</p>
+        <p class="stat-counter-value" id="cnt-active">—</p>
+        <p class="stat-counter-sub" id="cnt-active-clients">Клиентов: —</p>
+      </div>
+      <div class="stat-counter-card">
+        <p class="stat-counter-label">Документов в обработке</p>
+        <p class="stat-counter-value" id="cnt-process">—</p>
+        <p class="stat-counter-sub" id="cnt-process-clients">Клиентов: —</p>
+      </div>
+    </div>
+
+    <div class="stats-tabs" id="stats-tabs">
+      <button type="button" class="stats-tab active" data-tab="clients">По клиентам</button>
+      <button type="button" class="stats-tab" data-tab="employees">По сотрудникам</button>
+    </div>
+
+    <div id="tab-clients" class="stats-tab-panel"></div>
+    <div id="tab-employees" class="stats-tab-panel hidden"></div>
+
+  </div>
+</div>
+
+<script type="module" src="js/statistics.js"></script>
+</body>
+</html>

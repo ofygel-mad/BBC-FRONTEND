@@ -1,0 +1,33 @@
+{
+  "name": "salyk",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm -r --parallel run dev",
+    "dev:frontend": "pnpm --filter frontend dev",
+    "dev:backend": "pnpm --filter backend dev",
+    "build": "pnpm -r run build",
+    "test:frontend": "pnpm --filter ./frontend build",
+    "db:test:prepare": "pnpm --filter ./backend exec prisma db push --skip-generate && pnpm --filter ./backend db:seed",
+    "test:backend": "pnpm --filter ./backend test",
+    "test:e2e": "playwright test",
+    "test:ci": "pnpm run build && pnpm run db:test:prepare && pnpm run test:backend && pnpm run test:e2e",
+    "playwright:install": "playwright install chromium",
+    "db:migrate": "pnpm --filter backend db:migrate",
+    "db:seed": "pnpm --filter backend db:seed"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@prisma/client",
+      "@prisma/engines",
+      "esbuild",
+      "prisma"
+    ]
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.59.1"
+  }
+}

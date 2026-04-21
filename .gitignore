@@ -1,0 +1,16 @@
+node_modules/
+dist/
+.env
+*.local
+
+# Vite
+frontend/dist/
+
+# Prisma
+backend/dev.db
+backend/dev.db-journal
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*

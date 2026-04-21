@@ -1,0 +1,12 @@
+{
+  "name": "Big Business Consulting Organizer — для бухгалтеров",
+  "short_name": "BBC",
+  "description": "Органайзер для бухгалтеров",
+  "start_url": "index.html",
+  "display": "standalone",
+  "theme_color": "#181818",
+  "background_color": "#181818",
+  "icons": [
+    { "src": "assets/icons/logo.svg", "type": "image/svg+xml", "sizes": "any" }
+  ]
+}

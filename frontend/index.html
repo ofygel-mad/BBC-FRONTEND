@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BBC — Органайзер для бухгалтеров</title>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400&subset=latin,cyrillic" type="text/css" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/salykmaster.min.css"/>
+  <link rel="stylesheet" href="css/aos.min.css"/>
+  <style>
+    .page-header__actions { display: flex; align-items: center; gap: 10px; }
+    .button--ghost { background: transparent; border: 1.5px solid currentColor; color: inherit; }
+
+    /* Modal — isolated from salykmaster.min.css */
+    .sm-modal {
+      position: fixed; inset: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.55);
+    }
+    .sm-modal--hidden { display: none !important; }
+    .sm-modal__box {
+      background: #fff; border-radius: 16px;
+      padding: 40px 40px 32px; width: calc(100% - 32px); max-width: 420px;
+      position: relative; max-height: 90vh; overflow-y: auto;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+    }
+    .sm-modal__close {
+      position: absolute; top: 14px; right: 14px;
+      background: none; border: none; cursor: pointer;
+      width: 32px; height: 32px; border-radius: 50%;
+      font-size: 18px; line-height: 32px; text-align: center;
+      color: #999; transition: background 0.15s, color 0.15s;
+    }
+    .sm-modal__close:hover { background: #f0f0f0; color: #333; }
+    .sm-modal__title {
+      font-size: 22px; font-weight: 700; margin: 0 0 24px;
+      color: #131313; font-family: inherit;
+    }
+    .sm-modal__text { font-size: 14px; color: #666; margin-bottom: 20px; line-height: 1.5; }
+    .sm-modal .field { margin-bottom: 16px; }
+    .sm-modal .field__label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: #444; }
+    .sm-modal .field__input {
+      width: 100%; box-sizing: border-box;
+      padding: 10px 14px; border: 1.5px solid #ddd; border-radius: 8px;
+      font-size: 15px; font-family: inherit; outline: none;
+      transition: border-color 0.15s;
+    }
+    .sm-modal .field__input:focus { border-color: #4a90e2; }
+    .sm-modal__error { color: #e53935; font-size: 13px; margin: -4px 0 12px; min-height: 18px; }
+    .sm-modal__btn {
+      width: 100%; padding: 13px; border: none; border-radius: 50px;
+      background: #4a90e2; color: #fff; font-size: 16px; font-weight: 600;
+      cursor: pointer; font-family: inherit; transition: background 0.15s;
+      margin-top: 4px;
+    }
+    .sm-modal__btn:hover { background: #2e6bc7; }
+    .sm-modal__btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    .sm-modal__optional { font-weight: 400; color: #aaa; }
+  </style>
+</head>
+<body>
+
+  <header class="page-header">
+    <div class="page-header__container">
+      <div class="page-header__content container">
+        <a href="/" class="page-header__logo-link">
+          <figure class="page-header__col logo">
+            <svg class="logo__image" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="0"  y="0"  width="16" height="16" rx="3" fill="#4a90e2"/>
+              <rect x="20" y="0"  width="16" height="16" rx="3" fill="#4a90e2" opacity="0.55"/>
+              <rect x="0"  y="20" width="16" height="16" rx="3" fill="#4a90e2" opacity="0.55"/>
+              <rect x="20" y="20" width="16" height="16" rx="3" fill="#4a90e2" opacity="0.25"/>
+            </svg>
+            <figcaption class="logo__name">BBC</figcaption>
+          </figure>
+        </a>
+        <div class="page-header__actions visible-desktop">
+          <button type="button" id="btn-login-header" class="button button--ghost button--mobile-small">Войти</button>
+          <button type="button" id="btn-reg-header" class="button button--mobile-small">Регистрация</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- Hero -->
+    <section class="section">
+      <div class="section__content section__content--full-height section__content--horizontal container">
+        <div class="section__col section__col--left">
+          <h1 class="heading heading--main">Big Business Consulting Organizer</h1>
+          <p class="section__text">
+            <strong class="section__subhead">Эффективный и надёжный инструмент для аутсорсинговых бухгалтерских компаний</strong>
+            Выведет работу с вашими клиентами на новый уровень: позволит организовать её и расширить, избегая ошибок и просрочек.
+          </p>
+          <div class="section__app-links app-links">
+            <a href="https://apps.apple.com/ua/app/salykmaster-для-бухгалтеров/id1636659709" class="app-links__link" target="_blank" rel="noopener noreferrer">
+              <img src="images/appstore.png" class="app-links__image" alt="App Store">
+            </a>
+            <a href="https://play.google.com/store/apps/details?id=kz.salykmaster.accountant" class="app-links__link" target="_blank" rel="noopener noreferrer">
+              <img src="images/playmarket.png" class="app-links__image" alt="Google Play">
+            </a>
+          </div>
+          <button type="button" data-scroll-to-id="1" class="section__main-button button button--big button--red button--scroll-to">Узнать больше</button>
+        </div>
+        <figure class="section__col section__col--center">
+          <img src="images/main-screen.png" class="section__image section__image--main" alt="BBC app">
+        </figure>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section data-scroll-id="1" class="section section--colored">
+      <div class="section__content section__content--bottom-indent-small container">
+        <h2 class="section__header section__header--top-indent heading">Порядок и системность в ежедневной работе</h2>
+
+        <div class="section__sub-section sub-section">
+          <div class="sub-section__col" data-aos="fade-right">
+            <img src="images/screenshot_2023-07-24_at_14.13.53.png" class="section__image" alt="App example">
+          </div>
+          <div class="sub-section__col sub-section__col--center" data-aos="fade">
+            <h3 class="heading heading--small">Приложения для бухгалтеров и клиентов</h3>
+            <p class="section__text">BBC Organizer объединяет ваши задачи, ваших сотрудников и ваших клиентов в одном месте! Простой, гибкий и мощный инструмент.</p>
+          </div>
+        </div>
+
+        <div class="section__sub-section sub-section">
+          <div class="sub-section__col" data-aos="fade-right">
+            <img src="images/screenshot_2023-07-24_at_14.03.33.png" class="section__image" alt="App example">
+          </div>
+          <div class="sub-section__col sub-section__col--center" data-aos="fade">
+            <h3 class="heading heading--small">Заявки на доске и списком</h3>
+            <p class="section__text">Доска BBC упорядочивает заявки. С одного взгляда видите всё «что необходимо сделать» до «задача завершена». Создайте собственный рабочий процесс, соответствующий потребностям вашей команды.</p>
+          </div>
+        </div>
+
+        <div class="section__sub-section sub-section">
+          <div class="sub-section__col" data-aos="fade-right">
+            <img src="images/screenshot_2023-07-24_at_14.24.17.png" class="section__image" alt="App example">
+          </div>
+          <div class="sub-section__col sub-section__col--center" data-aos="fade">
+            <h3 class="heading heading--small">Цифровое рабочее пространство вашей удалённой команды</h3>
+            <p class="section__text">Нет пределов возможностям, когда ваша команда работает виртуально. Теперь в BBC вы сможете общаться со своей командой не теряя продуктивности!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Advantages -->
+    <section class="section">
+      <div class="section__content section__content--bottom-indent container">
+        <h2 class="section__header heading">Преимущества использования</h2>
+        <ul class="list list--col">
+          <li class="list__item list__item--third list-item list-item--col">
+            <figure class="list-item__icon square-icon">
+              <img src="images/advantage-icon1.png" class="square-icon__image" alt="Icon">
+            </figure>
+            <h3 class="heading heading--x-small" data-aos="fade">Продуманная система работы с заявками</h3>
+            <p data-aos="fade-up">Мы продумали и разработали систему работы с заявками, которая поможет ничего не упускать на каждом этапе и избегать ошибок.</p>
+          </li>
+          <li class="list__item list__item--third list-item list-item--col">
+            <figure class="list-item__icon square-icon">
+              <img src="images/advantage-icon1.png" class="square-icon__image" alt="Icon">
+            </figure>
+            <h3 class="heading heading--x-small" data-aos="fade">Вся информация в одном месте</h3>
+            <p data-aos="fade-up">В заявке хранится информация о ней, документы и переписка. Вам больше не нужно собирать данные из разных источников: почты, мессенджеров, личных записей.</p>
+          </li>
+          <li class="list__item list__item--third list-item list-item--col">
+            <figure class="list-item__icon square-icon">
+              <img src="images/advantage-icon1.png" class="square-icon__image" alt="Icon">
+            </figure>
+            <h3 class="heading heading--x-small" data-aos="fade">Удобная коммуникация с клиентами</h3>
+            <p data-aos="fade-up">Внутри каждой заявки есть чат между бухгалтером и клиентом. Это упрощает коммуникацию и помогает быстро решать возникающие проблемы.</p>
+          </li>
+        </ul>
+
+        <h2 class="section__header section__header--indent heading">Обратите внимание на эти вопросы</h2>
+        <ul class="list list--col">
+          <li class="list__item list__item--third-to-full list__item--mb list-item list-item--top-pad" data-aos="fade-up">
+            <span class="list-item__number">01</span>
+            <p class="list-item__text">Вы получаете запросы от клиентов по электронной почте, из мессенджеров или телефонных разговоров?</p>
+          </li>
+          <li class="list__item list__item--third-to-full list__item--mb list-item list-item--top-pad" data-aos="fade-up">
+            <span class="list-item__number">02</span>
+            <p class="list-item__text">Вы сталкиваетесь с пропущенными сроками или теряете запросы клиентов в информационном потоке?</p>
+          </li>
+          <li class="list__item list__item--third-to-full list__item--mb list-item list-item--top-pad" data-aos="fade-up">
+            <span class="list-item__number">03</span>
+            <p class="list-item__text">Вам сложно отследить, чем заняты ваши сотрудники и вы не знаете точно ли всё идёт по плану?</p>
+          </li>
+        </ul>
+        <p class="section__text section__text--emphasized">Если вы ответили «Да» хотя бы на один вопрос, то вам стоит попробовать BBC Organizer!</p>
+        <button type="button" id="btn-reg-section" class="button button--big button--red section__button">Регистрация</button>
+      </div>
+    </section>
+
+    <!-- Capabilities -->
+    <section class="section section--colored">
+      <div class="section__content section__content--bottom-indent container">
+        <h2 class="section__header heading">Возможности приложения</h2>
+        <ul class="section__list list list--col">
+          <li class="list__item list__item--bottom-indent list-item list-item--left-pad" data-aos="fade-up">
+            <div class="list-item__item-icon plus-icon"></div>
+            <p class="list-item__text">Все заявки от клиентов поступают в систему. Каждой заявке назначается ответственный, а её выполнением можно отслеживать в реальном времени.</p>
+          </li>
+          <li class="list__item list__item--bottom-indent list-item list-item--left-pad" data-aos="fade-up">
+            <div class="list-item__item-icon plus-icon"></div>
+            <p class="list-item__text">Заявки распределяются между сотрудниками по клиентам и категориям, что позволяет фокусироваться и ничего не упускать.</p>
+          </li>
+          <li class="list__item list__item--bottom-indent list-item list-item--left-pad" data-aos="fade-up">
+            <div class="list-item__item-icon plus-icon"></div>
+            <p class="list-item__text">Система ведёт учёт времени выполнения заявки и позволяет просматривать статистику по сотрудникам и клиентам.</p>
+          </li>
+          <li class="list__item list__item--bottom-indent list-item list-item--left-pad" data-aos="fade-up">
+            <div class="list-item__item-icon plus-icon"></div>
+            <p class="list-item__text">Клиент всегда в курсе того, на каком этапе выполнения находится его заявка и может задать вопрос бухгалтеру в чате.</p>
+          </li>
+          <li class="list__item list__item--bottom-indent list-item list-item--left-pad" data-aos="fade-up">
+            <div class="list-item__item-icon plus-icon"></div>
+            <p class="list-item__text">Все заявки, документы и переписки хранятся в одном месте. Удобная фильтрация и сортировка позволяет вернуться к необходимой информации в любой момент.</p>
+          </li>
+          <li class="list__item list__item--bottom-indent list-item list-item--left-pad" data-aos="fade-up">
+            <div class="list-item__item-icon plus-icon"></div>
+            <p class="list-item__text">Все действия в системе фиксируются в журнале. Можно отследить, что было сделано, кем и в какое время.</p>
+          </li>
+          <li class="list__item list__item--bottom-indent list-item list-item--left-pad" data-aos="fade-up">
+            <div class="list-item__item-icon plus-icon"></div>
+            <p class="list-item__text">Общение внутри вашей бухгалтерской команды теперь возможно в BBC. Переписка, поручения, сроки, результаты — всё в одном месте, нацеленные на увеличение продуктивности вашей команды.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- CTA / Inline Registration -->
+    <section class="section">
+      <div class="section__content section__content--bottom-indent section__content--center container">
+        <h2 class="section__header section__header--bottom-icon heading">Регистрация</h2>
+        <p class="section__text">
+          После регистрации вы получите доступ к системе «Big Business Consulting для бухгалтеров».<br/>
+          И сможете дать доступ клиентам к приложению «BBC для клиентов».
+        </p>
+        <button type="button" id="btn-reg-cta" class="button button--big button--red">Зарегистрироваться</button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ─── Login modal ──────────────────────────────────────────────── -->
+  <div id="login-popup" class="sm-modal sm-modal--hidden" role="dialog" aria-modal="true">
+    <div class="sm-modal__box">
+      <button type="button" class="sm-modal__close" data-close="login-popup" aria-label="Закрыть">✕</button>
+      <h2 class="sm-modal__title">Вход в систему</h2>
+      <form id="login-form">
+        <div class="field">
+          <label class="field__label" for="login-email">Логин</label>
+          <input class="field__input" id="login-email" type="text" autocomplete="username" required/>
+        </div>
+        <div class="field">
+          <label class="field__label" for="login-password">Пароль</label>
+          <input class="field__input" id="login-password" type="password" autocomplete="current-password" required/>
+        </div>
+        <p class="sm-modal__error" id="login-error"></p>
+        <button class="sm-modal__btn" type="submit" id="login-submit">Войти</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ─── Registration modal ───────────────────────────────────────── -->
+  <div id="registration" class="sm-modal sm-modal--hidden" role="dialog" aria-modal="true">
+    <div class="sm-modal__box">
+      <button type="button" class="sm-modal__close" data-close="registration" aria-label="Закрыть">✕</button>
+      <h2 class="sm-modal__title">Регистрация</h2>
+      <p class="sm-modal__text">После регистрации вы получите доступ к системе «Big Business Consulting» и сможете дать доступ клиентам.</p>
+      <form id="reg-form">
+        <div class="field">
+          <label class="field__label" for="reg-name">Имя</label>
+          <input class="field__input" id="reg-name" type="text" maxlength="64" placeholder="Иван Иванов" required/>
+        </div>
+        <div class="field">
+          <label class="field__label" for="reg-email">Электронная почта</label>
+          <input class="field__input" id="reg-email" type="email" autocomplete="email" maxlength="64" placeholder="email@example.com" required/>
+        </div>
+        <div class="field">
+          <label class="field__label" for="reg-password">Пароль</label>
+          <input class="field__input" id="reg-password" type="password" autocomplete="new-password" minlength="6" placeholder="Минимум 6 символов" required/>
+        </div>
+        <div class="field">
+          <label class="field__label" for="reg-company">Компания <span class="sm-modal__optional">(необязательно)</span></label>
+          <input class="field__input" id="reg-company" type="text" maxlength="64" placeholder="ТОО «Ваша компания»"/>
+        </div>
+        <p class="sm-modal__error" id="reg-error"></p>
+        <button class="sm-modal__btn" type="submit" id="reg-submit">Зарегистрироваться</button>
+      </form>
+    </div>
+  </div>
+
+  <script type="module">
+    import { login, register } from './js/api.js';
+    import { setAuth, getToken } from './js/app.js';
+
+    async function loadAos() {
+      return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = new URL('./js/aos.min.js', import.meta.url).href;
+        script.onload = () => resolve();
+        script.onerror = reject;
+        document.head.appendChild(script);
+      });
+    }
+
+    // If already logged in, skip landing page
+    if (getToken()) window.location.href = 'requests.html';
+
+    // ── AOS ──────────────────────────────────────────────────────────
+    loadAos()
+      .catch(() => null)
+      .finally(() => {
+        globalThis.AOS?.init({ disable: window.innerWidth < 1024, duration: 300, offset: 200 });
+      });
+
+    // ── Scroll-to ────────────────────────────────────────────────────
+    const scrollBtn = document.querySelector('.button--scroll-to');
+    const heroSection = document.querySelector('.section__content--full-height');
+    const heroH = heroSection ? heroSection.offsetHeight : 1;
+
+    window.addEventListener('scroll', () => {
+      const hdr = document.querySelector('.page-header__container');
+      if (hdr) hdr.classList.toggle('page-header__container--fixed', window.pageYOffset >= heroH);
+    });
+
+    if (scrollBtn) {
+      scrollBtn.addEventListener('click', () => {
+        const id = parseInt(scrollBtn.dataset.scrollToId);
+        const target = document.querySelector(`[data-scroll-id="${id}"]`);
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+
+    // ── Popup helpers ────────────────────────────────────────────────
+    function openPopup(id) {
+      document.getElementById(id)?.classList.remove('sm-modal--hidden');
+    }
+    function closePopup(id) {
+      document.getElementById(id)?.classList.add('sm-modal--hidden');
+    }
+
+    // Open triggers
+    document.getElementById('btn-login-header').addEventListener('click', () => openPopup('login-popup'));
+    document.getElementById('btn-reg-header').addEventListener('click',  () => openPopup('registration'));
+    document.getElementById('btn-reg-section')?.addEventListener('click', () => openPopup('registration'));
+    document.getElementById('btn-reg-cta')?.addEventListener('click',    () => openPopup('registration'));
+
+    // Close buttons
+    document.querySelectorAll('[data-close]').forEach(btn => {
+      btn.addEventListener('click', () => closePopup(btn.dataset.close));
+    });
+
+    // Click on backdrop closes
+    document.querySelectorAll('.sm-modal').forEach(modal => {
+      modal.addEventListener('click', e => {
+        if (e.target === modal) closePopup(modal.id);
+      });
+    });
+
+    // Escape closes
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.sm-modal:not(.sm-modal--hidden)').forEach(p => closePopup(p.id));
+      }
+    });
+
+    // ── Login form ───────────────────────────────────────────────────
+    const loginForm  = document.getElementById('login-form');
+    const loginError = document.getElementById('login-error');
+    const loginBtn   = document.getElementById('login-submit');
+
+    loginForm.addEventListener('submit', async e => {
+      e.preventDefault();
+      loginError.textContent = '';
+      loginBtn.disabled = true;
+      loginBtn.textContent = 'Вхожу…';
+      try {
+        const data = await login(
+          document.getElementById('login-email').value.trim(),
+          document.getElementById('login-password').value,
+        );
+        setAuth(data.token, data.user);
+        window.location.href = 'requests.html';
+      } catch (err) {
+        loginError.textContent = err.message || 'Ошибка входа';
+      } finally {
+        loginBtn.disabled = false;
+        loginBtn.textContent = 'Войти';
+      }
+    });
+
+    // ── Registration form ────────────────────────────────────────────
+    const regForm  = document.getElementById('reg-form');
+    const regError = document.getElementById('reg-error');
+    const regBtn   = document.getElementById('reg-submit');
+
+    regForm.addEventListener('submit', async e => {
+      e.preventDefault();
+      regError.textContent = '';
+      regBtn.disabled = true;
+      regBtn.textContent = 'Регистрирую…';
+      try {
+        const data = await register(
+          document.getElementById('reg-name').value.trim(),
+          document.getElementById('reg-email').value.trim(),
+          document.getElementById('reg-password').value,
+          document.getElementById('reg-company').value.trim(),
+        );
+        setAuth(data.token, data.user);
+        window.location.href = 'requests.html';
+      } catch (err) {
+        regError.textContent = err.message || 'Ошибка регистрации';
+      } finally {
+        regBtn.disabled = false;
+        regBtn.textContent = 'Зарегистрироваться';
+      }
+    });
+  </script>
+</body>
+</html>

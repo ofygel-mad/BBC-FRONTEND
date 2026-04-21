@@ -1,0 +1,92 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  name      String
+  role      String   @default("accountant")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Client {
+  id        Int       @id @default(autoincrement())
+  name      String
+  bin       String    @unique
+  type      String
+  phone     String?
+  status    String    @default("active")
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  invoices  Invoice[]
+  requests  Request[]
+}
+
+model Employee {
+  id        Int       @id @default(autoincrement())
+  name      String
+  iin       String    @unique
+  position  String
+  phone     String?
+  status    String    @default("active")
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  requests  Request[]
+}
+
+model Request {
+  id         Int              @id @default(autoincrement())
+  number     String           @unique
+  title      String
+  type       String           @default("external")
+  status     String           @default("new")
+  client     Client           @relation(fields: [clientId], references: [id])
+  clientId   Int
+  assignee   Employee?        @relation(fields: [assigneeId], references: [id])
+  assigneeId Int?
+  category   RequestCategory? @relation(fields: [categoryId], references: [id])
+  categoryId Int?
+  deadline   DateTime?
+  createdAt  DateTime         @default(now())
+  updatedAt  DateTime         @updatedAt
+}
+
+model RequestCategory {
+  id       Int       @id @default(autoincrement())
+  name     String    @unique
+  requests Request[]
+}
+
+model Position {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+}
+
+model Invoice {
+  id        Int      @id @default(autoincrement())
+  number    String   @unique
+  clientId  Int
+  client    Client   @relation(fields: [clientId], references: [id])
+  amount    Float
+  date      DateTime
+  dueDate   DateTime
+  status    String   @default("pending")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model JournalEntry {
+  id        Int      @id @default(autoincrement())
+  type      String
+  action    String
+  user      String
+  createdAt DateTime @default(now())
+}
